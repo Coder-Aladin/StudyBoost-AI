@@ -2,10 +2,915 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudentBoost AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5, user-scalable=yes">
+    <meta name="description" content="StudyBoost AI - Turn Long Notes Into Smart Summaries Instantly. AI-powered study assistant for students worldwide.">
+    <meta name="theme-color" content="#0F172A">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>StudyBoost AI - AI Powered Study Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
+    <!-- NAVBAR -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar-container">
+            <!-- Logo -->
+            <div class="navbar-logo" role="link" tabindex="0">
+                <div class="logo-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="url(#grad)" stroke-width="2"/>
+                        <path d="M8 12H16M12 8V16" stroke="url(#grad)" stroke-width="2" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="grad" x1="0" y1="0" x2="24" y2="24">
+                                <stop offset="0%" stop-color="#7C3AED"/>
+                                <stop offset="100%" stop-color="#06B6D4"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">StudyBoost AI</span>
+            </div>
+
+            <!-- Hamburger Menu -->
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
+
+            <!-- Navigation Links -->
+            <div class="nav-links" id="navLinks" role="menubar">
+                <a href="#features" class="nav-link" role="menuitem">Features</a>
+                <a href="#how-it-works" class="nav-link" role="menuitem">How It Works</a>
+                <a href="#pricing" class="nav-link" role="menuitem">Pricing</a>
+                <a href="#testimonials" class="nav-link" role="menuitem">Testimonials</a>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="nav-buttons">
+                <button class="btn-login" aria-label="Login to your account">Login</button>
+                <button class="btn-primary" aria-label="Get started with StudyBoost AI">Get Started</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" role="region" aria-label="Hero section">
+        <!-- Background Elements -->
+        <div class="hero-background" aria-hidden="true">
+            <div class="glow glow-cyan"></div>
+            <div class="glow glow-violet"></div>
+            <div class="grid-pattern"></div>
+        </div>
+
+        <div class="hero-container">
+            <!-- Left Content -->
+            <div class="hero-left">
+                <div class="badge" role="status">
+                    <span class="badge-dot" aria-hidden="true"></span>
+                    AI Powered Study Assistant
+                </div>
+
+                <h1 class="hero-title">
+                    Turn Long Notes Into
+                    <span class="gradient-text">Smart Summaries</span>
+                    Instantly
+                </h1>
+
+                <p class="hero-subtitle">
+                    Upload PDFs, notes, or text and get AI-powered summaries, revision notes, and key concepts in seconds.
+                </p>
+
+                <div class="hero-cta">
+                    <button class="btn-primary btn-large" aria-label="Get started for free with StudyBoost AI">Get Started Free</button>
+                    <button class="btn-secondary btn-large" aria-label="Watch demo video">
+                        <span class="play-icon" aria-hidden="true">▶</span>
+                        Watch Demo
+                    </button>
+                </div>
+
+                <div class="trust-indicators" role="list">
+                    <div class="trust-item" role="listitem">
+                        <span class="trust-icon" aria-hidden="true">✓</span>
+                        <span>Free to start</span>
+                    </div>
+                    <div class="trust-item" role="listitem">
+                        <span class="trust-icon" aria-hidden="true">✓</span>
+                        <span>No credit card required</span>
+                    </div>
+                    <div class="trust-item" role="listitem">
+                        <span class="trust-icon" aria-hidden="true">✓</span>
+                        <span>Used by students worldwide</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Dashboard Preview -->
+            <div class="hero-right" role="img" aria-label="Dashboard preview mockup">
+                <div class="dashboard-container">
+                    <!-- Main Dashboard Card -->
+                    <div class="dashboard-card main-card">
+                        <!-- Sidebar -->
+                        <div class="dashboard-sidebar" role="navigation" aria-label="Dashboard sidebar">
+                            <div class="sidebar-item active" role="button" tabindex="0">
+                                <div class="sidebar-icon" aria-hidden="true">📚</div>
+                            </div>
+                            <div class="sidebar-item" role="button" tabindex="0">
+                                <div class="sidebar-icon" aria-hidden="true">⚡</div>
+                            </div>
+                            <div class="sidebar-item" role="button" tabindex="0">
+                                <div class="sidebar-icon" aria-hidden="true">📊</div>
+                            </div>
+                            <div class="sidebar-item" role="button" tabindex="0">
+                                <div class="sidebar-icon" aria-hidden="true">⚙️</div>
+                            </div>
+                        </div>
+
+                        <!-- Dashboard Content -->
+                        <div class="dashboard-content">
+                            <!-- Upload Area -->
+                            <div class="upload-area" role="button" tabindex="0">
+                                <div class="upload-icon" aria-hidden="true">📤</div>
+                                <p class="upload-text">Upload your notes</p>
+                                <p class="upload-subtext">PDF, TXT, or image</p>
+                            </div>
+
+                            <!-- AI Summary Card -->
+                            <div class="summary-card">
+                                <div class="summary-header">
+                                    <span class="summary-title">AI Summary</span>
+                                    <div class="summary-spark" aria-hidden="true">✨</div>
+                                </div>
+                                <div class="summary-content" aria-hidden="true">
+                                    <div class="summary-line"></div>
+                                    <div class="summary-line short"></div>
+                                    <div class="summary-line"></div>
+                                </div>
+                            </div>
+
+                            <!-- Progress Indicators -->
+                            <div class="progress-section">
+                                <div class="progress-item">
+                                    <div class="progress-label">Processing</div>
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-fill"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Cards -->
+                    <div class="floating-card card-1">
+                        <div class="card-header">
+                            <span class="card-title">Key Concepts</span>
+                        </div>
+                        <div class="card-stat">42</div>
+                    </div>
+
+                    <div class="floating-card card-2">
+                        <div class="card-header">
+                            <span class="card-title">Study Time</span>
+                        </div>
+                        <div class="card-stat">2.5h</div>
+                    </div>
+
+                    <div class="floating-card card-3">
+                        <div class="card-header">
+                            <span class="card-title">Progress</span>
+                        </div>
+                        <div class="progress-ring">
+                            <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
+                                <circle cx="20" cy="20" r="18" fill="none" stroke="#334155" stroke-width="2"/>
+                                <circle cx="20" cy="20" r="18" fill="none" stroke="url(#progGrad)" stroke-width="2" stroke-dasharray="56.5 113" stroke-linecap="round" transform="rotate(-90 20 20)"/>
+                                <defs>
+                                    <linearGradient id="progGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#7C3AED"/>
+                                        <stop offset="100%" stop-color="#06B6D4"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <span class="progress-percent">75%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features" id="features" role="region" aria-label="Features section">
+        <!-- Background Elements -->
+        <div class="features-background" aria-hidden="true">
+            <div class="feature-glow glow-1"></div>
+            <div class="feature-glow glow-2"></div>
+        </div>
+
+        <div class="features-container">
+            <!-- Section Heading -->
+            <div class="features-header">
+                <div class="features-tagline">POWERFUL FEATURES</div>
+                <h2 class="features-title">Everything You Need to Study Smarter</h2>
+                <p class="features-description">AI-powered tools designed to help students learn faster, retain more, and ace their exams</p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="features-grid">
+                <!-- Featured Card: Image to Notes -->
+                <div class="feature-card featured-card" role="article">
+                    <div class="card-content">
+                        <div class="card-icon">📸</div>
+                        <h3 class="card-title">Image to Notes</h3>
+                        <p class="card-description">Upload handwritten notes or book pages and convert them into digital, organized notes instantly using advanced OCR and AI.</p>
+                        
+                        <ul class="card-benefits" role="list">
+                            <li role="listitem">Handwriting recognition</li>
+                            <li role="listitem">Automatic formatting</li>
+                            <li role="listitem">Digital organization</li>
+                        </ul>
+
+                        <div class="card-preview featured-preview" aria-hidden="true">
+                            <div class="preview-element"></div>
+                            <div class="preview-element small"></div>
+                            <div class="preview-element medium"></div>
+                        </div>
+
+                        <button class="btn-card">Start Converting</button>
+                    </div>
+                </div>
+
+                <!-- Card 1: AI Notes Summarizer -->
+                <div class="feature-card" role="article">
+                    <div class="card-content">
+                        <div class="card-icon">📝</div>
+                        <h3 class="card-title">Notes Summarizer</h3>
+                        <p class="card-description">Turn long study material into short, exam-ready notes instantly.</p>
+                        
+                        <ul class="card-benefits" role="list">
+                            <li role="listitem">AI-powered extraction</li>
+                            <li role="listitem">Key points highlighted</li>
+                            <li role="listitem">Multiple formats</li>
+                        </ul>
+
+                        <div class="card-preview" aria-hidden="true">
+                            <div class="preview-dot"></div>
+                            <div class="preview-dot"></div>
+                            <div class="preview-dot"></div>
+                        </div>
+
+                        <button class="btn-card">Try Now</button>
+                    </div>
+                </div>
+
+                <!-- Card 2: YouTube Video Summarizer -->
+                <div class="feature-card" role="article">
+                    <div class="card-content">
+                        <div class="card-icon">▶️</div>
+                        <h3 class="card-title">Video Summarizer</h3>
+                        <p class="card-description">Convert long educational videos into quick key-point summaries.</p>
+                        
+                        <ul class="card-benefits" role="list">
+                            <li role="listitem">YouTube extraction</li>
+                            <li role="listitem">Timestamp-based notes</li>
+                            <li role="listitem">Concept mapping</li>
+                        </ul>
+
+                        <div class="card-preview" aria-hidden="true">
+                            <div class="preview-dot"></div>
+                            <div class="preview-dot"></div>
+                            <div class="preview-dot"></div>
+                        </div>
+
+                        <button class="btn-card">Try Now</button>
+                    </div>
+                </div>
+
+                <!-- Card 3: PDF Summarizer -->
+                <div class="feature-card" role="article">
+                    <div class="card-content">
+                        <div class="card-icon">📄</div>
+                        <h3 class="card-title">PDF Summarizer</h3>
+                        <p class="card-description">Upload PDFs and generate concise study notes automatically.</p>
+                        
+                        <ul class="card-benefits" role="list">
+                            <li role="listitem">Multi-page processing</li>
+                            <li role="listitem">Smart extraction</li>
+                            <li role="listitem">Searchable output</li>
+                        </ul>
+
+                        <div class="card-preview" aria-hidden="true">
+                            <div class="preview-dot"></div>
+                            <div class="preview-dot"></div>
+                            <div class="preview-dot"></div>
+                        </div>
+
+                        <button class="btn-card">Try Now</button>
+                    </div>
+                </div>
+
+                <!-- Card 4: Flashcards Generator -->
+                <div class="feature-card" role="article">
+                    <div class="card-content">
+                        <div class="card-icon">🎴</div>
+                        <h3 class="card-title">Flashcards Generator</h3>
+                        <p class="card-description">Generate revision flashcards automatically from your notes.</p>
+                        
+                        <ul class="card-benefits" role="list">
+                            <li role="listitem">Automatic Q&A generation</li>
+                            <li role="listitem">Spaced repetition</li>
+                            <li role="listitem">Progress tracking</li>
+                        </ul>
+
+                        <div class="card-preview" aria-hidden="true">
+                            <div class="preview-dot"></div>
+                            <div class="preview-dot"></div>
+                            <div class="preview-dot"></div>
+                        </div>
+
+                        <button class="btn-card">Try Now</button>
+                    </div>
+                </div>
+
+                <!-- Card 5: Quiz Generator -->
+                <div class="feature-card" role="article">
+                    <div class="card-content">
+                        <div class="card-icon">❓</div>
+                        <h3 class="card-title">Quiz Generator</h3>
+                        <p class="card-description">Create AI-generated quizzes and MCQs for exam practice.</p>
+                        
+                        <ul class="card-benefits" role="list">
+                            <li role="listitem">Customizable difficulty</li>
+                            <li role="listitem">Instant scoring</li>
+                            <li role="listitem">Detailed analytics</li>
+                        </ul>
+
+                        <div class="card-preview" aria-hidden="true">
+                            <div class="preview-dot"></div>
+                            <div class="preview-dot"></div>
+                            <div class="preview-dot"></div>
+                        </div>
+
+                        <button class="btn-card">Try Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS SECTION -->
+    <section class="how-it-works" id="how-it-works" role="region" aria-label="How it works section">
+        <!-- Background Elements -->
+        <div class="how-background" aria-hidden="true">
+            <div class="how-glow glow-left"></div>
+            <div class="how-glow glow-right"></div>
+        </div>
+
+        <div class="how-container">
+            <!-- Section Heading -->
+            <div class="how-header">
+                <div class="how-tagline">SIMPLE WORKFLOW</div>
+                <h2 class="how-title">How It Works in 3 Steps</h2>
+                <p class="how-description">StudyBoost AI makes learning effortless with an intuitive workflow designed for busy students</p>
+            </div>
+
+            <!-- Steps Container -->
+            <div class="steps-wrapper">
+                <div class="steps-timeline">
+                    <!-- Step 1 -->
+                    <div class="step-item" role="listitem">
+                        <div class="step-connector" aria-hidden="true">
+                            <div class="connector-line"></div>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            
+                            <div class="step-icon">📤</div>
+                            
+                            <h3 class="step-title">Upload Your Content</h3>
+                            
+                            <p class="step-description">Paste notes, upload PDFs, share YouTube links, or snap photos of handwritten notes and book pages.</p>
+                            
+                            <ul class="step-details" role="list">
+                                <li role="listitem">📝 Text & Notes</li>
+                                <li role="listitem">📄 PDF Files</li>
+                                <li role="listitem">▶️ YouTube Videos</li>
+                                <li role="listitem">📸 Images & Photos</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-item" role="listitem">
+                        <div class="step-connector" aria-hidden="true">
+                            <div class="connector-line"></div>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            
+                            <div class="step-icon">⚡</div>
+                            
+                            <h3 class="step-title">AI Processes</h3>
+                            
+                            <p class="step-description">Our advanced AI analyzes, extracts key concepts, and organizes information for maximum retention and understanding.</p>
+                            
+                            <ul class="step-details" role="list">
+                                <li role="listitem">🤖 AI Analysis</li>
+                                <li role="listitem">🔍 Smart Extraction</li>
+                                <li role="listitem">📊 Content Organization</li>
+                                <li role="listitem">✨ Concept Mapping</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-item last-step" role="listitem">
+                        <div class="step-connector empty" aria-hidden="true"></div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            
+                            <div class="step-icon">🎁</div>
+                            
+                            <h3 class="step-title">Get Study Tools</h3>
+                            
+                            <p class="step-description">Instantly get AI-powered summaries, flashcards, quizzes, and revision notes ready for exam preparation.</p>
+                            
+                            <ul class="step-details" role="list">
+                                <li role="listitem">📋 Smart Summaries</li>
+                                <li role="listitem">🎴 Flashcards</li>
+                                <li role="listitem">❓ AI Quizzes</li>
+                                <li role="listitem">📈 Progress Tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom CTA -->
+            <div class="how-cta">
+                <p class="how-cta-text">That's it! Start studying smarter today.</p>
+                <button class="btn-primary" aria-label="Get started for free with StudyBoost AI">Get Started Free</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- STUDENT BENEFITS SECTION -->
+    <section class="student-benefits" role="region" aria-label="Student benefits section">
+        <!-- Background Elements -->
+        <div class="benefits-background" aria-hidden="true">
+            <div class="benefits-glow glow-benefits-1"></div>
+            <div class="benefits-glow glow-benefits-2"></div>
+        </div>
+
+        <div class="benefits-container">
+            <!-- Section Heading -->
+            <div class="benefits-header">
+                <div class="benefits-tagline">WHY STUDENTS CHOOSE US</div>
+                <h2 class="benefits-title">Transforming Your Study Experience</h2>
+                <p class="benefits-description">Discover how thousands of students are studying smarter, not harder</p>
+            </div>
+
+            <!-- Benefits Grid -->
+            <div class="benefits-grid">
+                <!-- Benefit 1: Save Study Time -->
+                <div class="benefit-card" role="article">
+                    <div class="benefit-icon">⏰</div>
+                    <h3 class="benefit-title">Save Study Time</h3>
+                    <p class="benefit-text">Reduce note-taking by 80%. Focus on understanding, not copying.</p>
+                    <div class="benefit-accent" aria-hidden="true"></div>
+                </div>
+
+                <!-- Benefit 2: Learn Faster -->
+                <div class="benefit-card" role="article">
+                    <div class="benefit-icon">🚀</div>
+                    <h3 class="benefit-title">Learn Faster</h3>
+                    <p class="benefit-text">AI-powered summaries help you grasp concepts in minutes, not hours.</p>
+                    <div class="benefit-accent" aria-hidden="true"></div>
+                </div>
+
+                <!-- Benefit 3: Reduce Exam Stress -->
+                <div class="benefit-card" role="article">
+                    <div class="benefit-icon">😌</div>
+                    <h3 class="benefit-title">Reduce Exam Stress</h3>
+                    <p class="benefit-text">Be fully prepared with comprehensive revision materials and practice quizzes.</p>
+                    <div class="benefit-accent" aria-hidden="true"></div>
+                </div>
+
+                <!-- Benefit 4: Organize Notes -->
+                <div class="benefit-card" role="article">
+                    <div class="benefit-icon">📚</div>
+                    <h3 class="benefit-title">Organize Notes Smarter</h3>
+                    <p class="benefit-text">Automatically structured, searchable, and accessible from anywhere.</p>
+                    <div class="benefit-accent" aria-hidden="true"></div>
+                </div>
+
+                <!-- Benefit 5: Improve Productivity -->
+                <div class="benefit-card" role="article">
+                    <div class="benefit-icon">⚡</div>
+                    <h3 class="benefit-title">Improve Productivity</h3>
+                    <p class="benefit-text">Get more done in less time with intelligent study workflows.</p>
+                    <div class="benefit-accent" aria-hidden="true"></div>
+                </div>
+
+                <!-- Benefit 6: Prepare for Exams -->
+                <div class="benefit-card" role="article">
+                    <div class="benefit-icon">🎯</div>
+                    <h3 class="benefit-title">Prepare for Exams</h3>
+                    <p class="benefit-text">Complete exam-ready materials including flashcards, quizzes, and summaries.</p>
+                    <div class="benefit-accent" aria-hidden="true"></div>
+                </div>
+            </div>
+
+            <!-- Statistics Banner -->
+            <div class="stats-banner">
+                <div class="stats-item">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Students Helped</div>
+                </div>
+                <div class="stats-divider" aria-hidden="true"></div>
+                <div class="stats-item">
+                    <div class="stat-number">2M+</div>
+                    <div class="stat-label">Summaries Generated</div>
+                </div>
+                <div class="stats-divider" aria-hidden="true"></div>
+                <div class="stats-item">
+                    <div class="stat-number">1M+</div>
+                    <div class="stat-label">Study Hours Saved</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="testimonials" id="testimonials" role="region" aria-label="Testimonials section">
+        <!-- Background Elements -->
+        <div class="testimonials-background" aria-hidden="true">
+            <div class="testimonials-glow glow-testi-1"></div>
+            <div class="testimonials-glow glow-testi-2"></div>
+        </div>
+
+        <div class="testimonials-container">
+            <!-- Section Heading -->
+            <div class="testimonials-header">
+                <div class="testimonials-tagline">LOVED BY STUDENTS</div>
+                <h2 class="testimonials-title">Real Stories from Real Students</h2>
+                <p class="testimonials-description">See how StudyBoost AI is transforming the way students study and succeed</p>
+            </div>
+
+            <!-- Testimonials Grid/Slider -->
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card" role="article">
+                    <div class="quote-icon" aria-hidden="true">"</div>
+                    
+                    <p class="testimonial-text">StudyBoost AI completely changed how I study. Instead of spending 3 hours taking notes, I now get comprehensive summaries in minutes. My grades improved by 25% in just one semester!</p>
+                    
+                    <div class="testimonial-rating">
+                        <span class="star" aria-label="rated 5 out of 5 stars">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: linear-gradient(135deg, #7C3AED, #06B6D4)">
+                            <span class="avatar-initials">SA</span>
+                        </div>
+                        <div class="author-info">
+                            <h4 class="author-name">Sarah Anderson</h4>
+                            <p class="author-role">Pre-Med Student</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card" role="article">
+                    <div class="quote-icon" aria-hidden="true">"</div>
+                    
+                    <p class="testimonial-text">The PDF summarizer saved me so much time during exam prep. I could focus on understanding concepts instead of rereading textbooks. Highly recommended for any student!</p>
+                    
+                    <div class="testimonial-rating">
+                        <span class="star" aria-label="rated 5 out of 5 stars">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: linear-gradient(135deg, #06B6D4, #7C3AED)">
+                            <span class="avatar-initials">JK</span>
+                        </div>
+                        <div class="author-info">
+                            <h4 class="author-name">James Kumar</h4>
+                            <p class="author-role">Engineering Student</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card" role="article">
+                    <div class="quote-icon" aria-hidden="true">"</div>
+                    
+                    <p class="testimonial-text">I was skeptical at first, but the AI-generated flashcards are incredibly effective. They focus on exactly what I need to study. My study sessions are now 60% more efficient!</p>
+                    
+                    <div class="testimonial-rating">
+                        <span class="star" aria-label="rated 5 out of 5 stars">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: linear-gradient(135deg, #EC4899, #8B5CF6)">
+                            <span class="avatar-initials">EM</span>
+                        </div>
+                        <div class="author-info">
+                            <h4 class="author-name">Emma Mitchell</h4>
+                            <p class="author-role">Business Student</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="testimonial-card" role="article">
+                    <div class="quote-icon" aria-hidden="true">"</div>
+                    
+                    <p class="testimonial-text">The image to notes feature is a game-changer! I can now digitize my handwritten notes instantly. It's like having a personal study assistant available 24/7.</p>
+                    
+                    <div class="testimonial-rating">
+                        <span class="star" aria-label="rated 5 out of 5 stars">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: linear-gradient(135deg, #14B8A6, #F59E0B)">
+                            <span class="avatar-initials">MR</span>
+                        </div>
+                        <div class="author-info">
+                            <h4 class="author-name">Michael Rodriguez</h4>
+                            <p class="author-role">Law Student</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 5 -->
+                <div class="testimonial-card" role="article">
+                    <div class="quote-icon" aria-hidden="true">"</div>
+                    
+                    <p class="testimonial-text">I recommend StudyBoost AI to all my classmates. The quiz generator helped me prepare for my finals in just 2 weeks. I got the highest score in my class!</p>
+                    
+                    <div class="testimonial-rating">
+                        <span class="star" aria-label="rated 5 out of 5 stars">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: linear-gradient(135deg, #F59E0B, #EF4444)">
+                            <span class="avatar-initials">OP</span>
+                        </div>
+                        <div class="author-info">
+                            <h4 class="author-name">Olivia Patel</h4>
+                            <p class="author-role">Medical Student</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 6 -->
+                <div class="testimonial-card" role="article">
+                    <div class="quote-icon" aria-hidden="true">"</div>
+                    
+                    <p class="testimonial-text">Finally, a tool that understands what students really need! No more late-night cramming. StudyBoost AI helped me maintain a 4.0 GPA this semester.</p>
+                    
+                    <div class="testimonial-rating">
+                        <span class="star" aria-label="rated 5 out of 5 stars">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: linear-gradient(135deg, #8B5CF6, #06B6D4)">
+                            <span class="avatar-initials">LJ</span>
+                        </div>
+                        <div class="author-info">
+                            <h4 class="author-name">Liam Johnson</h4>
+                            <p class="author-role">Computer Science Major</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonials Footer -->
+            <div class="testimonials-footer">
+                <p class="testimonials-footer-text">Join thousands of students already studying smarter with StudyBoost AI</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section class="pricing" role="region" aria-label="Pricing section">
+        <!-- Background Elements -->
+        <div class="pricing-background" aria-hidden="true">
+            <div class="pricing-glow glow-price-1"></div>
+            <div class="pricing-glow glow-price-2"></div>
+        </div>
+
+        <div class="pricing-container">
+            <!-- Section Heading -->
+            <div class="pricing-header">
+                <div class="pricing-tagline">SIMPLE PRICING</div>
+                <h2 class="pricing-title">Choose Your Perfect Plan</h2>
+                <p class="pricing-description">Select the plan that best fits your study needs. All plans include core features.</p>
+            </div>
+
+            <!-- Billing Toggle -->
+            <div class="billing-toggle">
+                <span class="toggle-label">Monthly</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="billing-toggle" aria-label="Toggle between monthly and yearly billing">
+                    <span class="toggle-slider"></span>
+                </label>
+                <span class="toggle-label">Yearly <span class="save-badge">Save 20%</span></span>
+            </div>
+
+            <!-- Pricing Cards Grid -->
+            <div class="pricing-grid">
+                <!-- Free Plan -->
+                <div class="pricing-card free-plan" role="article">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Free</h3>
+                        <p class="plan-subtitle">Perfect for getting started</p>
+                    </div>
+
+                    <div class="plan-price">
+                        <span class="currency">$</span>
+                        <span class="amount">0</span>
+                        <span class="period">/month</span>
+                    </div>
+
+                    <button class="btn-plan">Get Started</button>
+
+                    <ul class="plan-features" role="list">
+                        <li role="listitem">
+                            <span class="feature-icon">✓</span>
+                            <span>5 summaries/month</span>
+                        </li>
+                        <li role="listitem">
+                            <span class="feature-icon">✓</span>
+                            <span>Basic notes access</span>
+                        </li>
+                        <li role="listitem">
+                            <span class="feature-icon">✓</span>
+                            <span>Mobile app access</span>
+                        </li>
+                        <li role="listitem">
+                            <span class="feature-icon">✗</span>
+                            <span class="disabled">Flashcards generator</span>
+                        </li>
+                        <li role="listitem">
+                            <span class="feature-icon">✗</span>
+                            <span class="disabled">Quiz generation</span>
+                        </li>
+                        <li role="listitem">
+                            <span class="feature-icon">✗</span>
+                            <span class="disabled">Priority support</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pro Plan (Most Popular) -->
+                <div class="pricing-card pro-plan featured" role="article">
+                    <div class="popular-badge">Most Popular</div>
+
+                    <div class="plan-header">
+                        <h3 class="plan-name">Pro</h3>
+                        <p class="plan-subtitle">For serious learners</p>
+                    </div>
+
+                    <div class="plan-price">
+                        <span class="currency">$</span>
+                        <span class="amount" data-monthly="9" data-yearly="108">9</span>
+                        <span class="period">/month</span>
+                    </div>
+
+                    <p class="yearly-info" style="display: none;">$108/year</p>
+
+                    <button class="btn-plan btn-primary">Start Free Trial</button>
+
+                    <ul class="plan-features" role="list">
+                        <li role="listitem">
+                            <span class="feature-icon">✓</span>
+                            <span>Unlimited summaries</span>
+                        </li>
+                        <li role="listitem">
+                            <span class="feature-icon">✓</span>
+                            <span>Flashcards generator</span>
+                        </li>
+                        <li role="listitem">
+                            <span class="feature-icon">✓</span>
+                            <span>Quiz generation</span>
+                        </li>
+                        <li role="listitem">
+                            <span class="feature-icon">✓</span>
+                            <span>Image to notes OCR</span>
+                        </li>
+                        <li role="listitem">
+                            <span class="feature-icon">✓</span>
+                            <span>PDF & Video summaries</span>
+                        </li>
+                        <li role="listitem">
+                            <span class="feature-icon">✗</span>
+                            <span class="disabled">Priority support</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="pricing-card premium-plan" role="article">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Premium</h3>
+                        <p class="plan-subtitle">For power users</p>
+                    </div>
+
+                    <div class="plan-price">
+                        <span class="currency">$</span>
+                        <span class="amount" data-monthly="19" data-yearly="228">19</span>
+                        <span class="period">/month</span>
+                    </div>
+
+                    <p class="yearly-info" style="display: none;">$228/year</p>
+
+                    <button class="btn-plan btn-secondary">Upgrade Now</button>
+
+                    <ul class="plan-features" role="list">
+                        <li role="listitem">
+                            <span class="feature-icon">✓</span>
+                            <span>Everything in Pro</span>
+                        </li>
+                        <li role="listitem">
+                            <span class="feature-icon">✓</span>
+                            <span>Priority support 24/7</span>
+                        </li>
+                        <li role="listitem">
+                            <span class="feature-icon">✓</span>
+                            <span>Custom study schedules</span>
+                        </li>
+                        <li role="listitem">
+                            <span class="feature-icon">✓</span>
+                            <span>Advanced analytics</span>
+                        </li>
+                        <li role="listitem">
+                            <span class="feature-icon">✓</span>
+                            <span>Offline access</span>
+                        </li>
+                        <li role="listitem">
+                            <span class="feature-icon">✓</span>
+                            <span>API access</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Pricing Footer -->
+            <div class="pricing-footer">
+                <p class="pricing-note">All plans include a 7-day free trial. No credit card required.</p>
+                <p class="pricing-support">Questions? <a href="#" class="support-link">Contact our support team</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section" role="region" aria-label="Call to action section">
+        <div class="cta-container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Study Smarter?</h2>
+                <p class="cta-description">Join thousands of students using AI-powered study tools to ace their exams and reach their academic goals.</p>
+                
+                <div class="cta-buttons">
+                    <button class="btn-primary" aria-label="Get started for free with StudyBoost AI">Get Started Free</button>
+                    <button class="btn-secondary" aria-label="Watch demo video">
+                        <span class="play-icon" aria-hidden="true">▶</span>
+                        Watch Demo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/script.js"></script>
 </body>
 </html>

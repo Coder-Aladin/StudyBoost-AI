@@ -504,3 +504,316 @@ document.querySelectorAll('.sidebar-item').forEach(item => {
         }
     });
 });
+
+/* ================================================
+   FOOTER: THEME TOGGLE
+   ================================================ */
+
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+
+// Initialize theme from localStorage
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+}
+
+function setTheme(theme) {
+    if (theme === 'dark') {
+        html.classList.add('dark-mode');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        html.classList.remove('dark-mode');
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+function toggleTheme() {
+    const currentTheme = html.classList.contains('dark-mode') ? 'dark' : 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+}
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', toggleTheme);
+    
+    // Keyboard support
+    themeToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleTheme();
+        }
+    });
+}
+
+// Initialize theme on page load
+initializeTheme();
+
+/* ================================================
+   FOOTER: LANGUAGE SELECTOR
+   ================================================ */
+
+const languageButton = document.getElementById('languageButton');
+const languageDropdown = document.getElementById('languageDropdown');
+const languageOptions = document.querySelectorAll('.language-option');
+
+// Language data for display
+const languages = {
+    en: { name: 'English', flag: '🇺🇸' },
+    es: { name: 'Español', flag: '🇪🇸' },
+    fr: { name: 'Français', flag: '🇫🇷' },
+    de: { name: 'Deutsch', flag: '🇩🇪' },
+    zh: { name: '中文', flag: '🇨🇳' },
+    ja: { name: '日本語', flag: '🇯🇵' }
+};
+
+// Initialize language from localStorage
+function initializeLanguage() {
+    const savedLanguage = localStorage.getItem('language') || 'en';
+    setLanguage(savedLanguage);
+}
+
+function setLanguage(langCode) {
+    localStorage.setItem('language', langCode);
+    
+    // Update button display
+    if (languageButton) {
+        const langData = languages[langCode] || languages.en;
+        const langText = languageButton.querySelector('.language-text');
+        if (langText) {
+            langText.textContent = langData.name;
+        }
+    }
+    
+    // Update active state in dropdown
+    languageOptions.forEach(option => {
+        const isSelected = option.dataset.lang === langCode;
+        option.style.background = isSelected ? 'rgba(124, 58, 237, 0.2)' : 'transparent';
+        option.style.color = isSelected ? 'var(--primary)' : 'var(--text-secondary)';
+    });
+    
+    // Trigger language change event
+    document.dispatchEvent(new CustomEvent('languageChange', { detail: { language: langCode } }));
+}
+
+// Toggle dropdown
+if (languageButton) {
+    languageButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isHidden = languageDropdown.hidden;
+        languageDropdown.hidden = !isHidden;
+        languageButton.setAttribute('aria-expanded', !isHidden);
+    });
+    
+    // Keyboard support
+    languageButton.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            languageButton.click();
+        }
+        if (e.key === 'ArrowDown' && !languageDropdown.hidden) {
+            e.preventDefault();
+            languageOptions[0].focus();
+        }
+    });
+}
+
+// Language option selection
+languageOptions.forEach(option => {
+    option.addEventListener('click', () => {
+        const lang = option.dataset.lang;
+        setLanguage(lang);
+        languageDropdown.hidden = true;
+        languageButton.setAttribute('aria-expanded', 'false');
+    });
+    
+    // Keyboard support for options
+    option.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            option.click();
+        }
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            const index = Array.from(languageOptions).indexOf(option);
+            if (index < languageOptions.length - 1) {
+                languageOptions[index + 1].focus();
+            }
+        }
+        if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            const index = Array.from(languageOptions).indexOf(option);
+            if (index > 0) {
+                languageOptions[index - 1].focus();
+            } else {
+                languageButton.focus();
+            }
+        }
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            languageDropdown.hidden = true;
+            languageButton.setAttribute('aria-expanded', 'false');
+            languageButton.focus();
+        }
+    });
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+    if (languageDropdown && !languageDropdown.hidden && !e.target.closest('.language-selector')) {
+        languageDropdown.hidden = true;
+        languageButton.setAttribute('aria-expanded', 'false');
+    }
+});
+
+// Initialize language on page load
+initializeLanguage();
+
+/* ================================================
+   FOOTER: NEWSLETTER SUBSCRIPTION
+   ================================================ */
+
+const newsletterForm = document.querySelector('.newsletter-input-group');
+const newsletterInput = document.getElementById('newsletter-email');
+const newsletterButton = document.querySelector('.newsletter-button');
+
+if (newsletterButton && newsletterInput) {
+    newsletterButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        const email = newsletterInput.value.trim();
+        
+        // Basic email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        if (!email) {
+            showNewsletterMessage('Please enter your email', 'error');
+            return;
+        }
+        
+        if (!emailRegex.test(email)) {
+            showNewsletterMessage('Please enter a valid email', 'error');
+            return;
+        }
+        
+        // Simulate API call
+        newsletterButton.disabled = true;
+        newsletterButton.innerHTML = '<span class="button-text">Subscribing...</span>';
+        
+        setTimeout(() => {
+            showNewsletterMessage('Successfully subscribed! Check your email.', 'success');
+            newsletterInput.value = '';
+            newsletterButton.disabled = false;
+            newsletterButton.innerHTML = '<span class="button-text">Subscribe</span><span class="button-arrow" aria-hidden="true">→</span>';
+        }, 1500);
+    });
+    
+    // Allow Enter key to submit
+    newsletterInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            newsletterButton.click();
+        }
+    });
+}
+
+function showNewsletterMessage(message, type) {
+    const messageElement = document.createElement('div');
+    messageElement.className = `newsletter-message ${type}`;
+    messageElement.textContent = message;
+    messageElement.style.cssText = `
+        position: absolute;
+        bottom: -40px;
+        left: 0;
+        right: 0;
+        padding: 0.5rem 1rem;
+        border-radius: var(--radius-md);
+        font-size: 0.8125rem;
+        font-weight: 500;
+        text-align: center;
+        ${type === 'success' ? 'background: rgba(34, 197, 94, 0.2); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3);' : 'background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3);'}
+        animation: slideUp 0.3s ease-out;
+    `;
+    
+    const container = newsletterForm.parentElement;
+    container.style.position = 'relative';
+    
+    // Remove existing message
+    const existingMessage = container.querySelector('.newsletter-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+    
+    container.appendChild(messageElement);
+    
+    // Auto-remove after 4 seconds
+    setTimeout(() => {
+        messageElement.style.animation = 'slideDown 0.3s ease-out forwards';
+        setTimeout(() => messageElement.remove(), 300);
+    }, 4000);
+}
+
+/* ================================================
+   FOOTER: SOCIAL MEDIA LINKS
+   ================================================ */
+
+const socialIcons = document.querySelectorAll('.social-icon');
+
+socialIcons.forEach(icon => {
+    icon.addEventListener('mouseenter', function() {
+        if (window.innerWidth > 767) {
+            this.style.transform = 'translateY(-3px) scale(1.05)';
+        }
+    });
+    
+    icon.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+    });
+    
+    // Keyboard support
+    icon.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            icon.click();
+        }
+    });
+});
+
+/* ================================================
+   FOOTER: CONTACT BADGE ANIMATION
+   ================================================ */
+
+// The pulsing animation is handled by CSS, but we can enhance it with JavaScript if needed
+
+/* ================================================
+   FOOTER: SMOOTH INTERACTIONS
+   ================================================ */
+
+// Enhance footer links with smooth transitions
+const footerLinks = document.querySelectorAll('.footer-link');
+
+footerLinks.forEach(link => {
+    link.addEventListener('mouseenter', function() {
+        if (window.innerWidth > 767) {
+            this.style.transform = 'translateX(4px)';
+        }
+    });
+    
+    link.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateX(0)';
+    });
+});
+
+/* ================================================
+   FOOTER: RESPONSIVE BEHAVIOR
+   ================================================ */
+
+// Handle language dropdown position on scroll
+window.addEventListener('scroll', () => {
+    if (languageDropdown && !languageDropdown.hidden) {
+        const rect = languageButton.getBoundingClientRect();
+        if (rect.bottom + 250 > window.innerHeight) {
+            languageDropdown.style.bottom = 'auto';
+            languageDropdown.style.top = '100%';
+        }
+    }
+});

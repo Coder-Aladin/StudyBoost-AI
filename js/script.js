@@ -391,6 +391,52 @@ style.textContent = `
 document.head.appendChild(style);
 
 // ================================================
+// PRICING BILLING TOGGLE
+// ================================================
+
+const billingToggle = document.getElementById('billing-toggle');
+
+if (billingToggle) {
+    billingToggle.addEventListener('change', function() {
+        const isYearly = this.checked;
+        
+        // Update all pricing cards
+        const pricingCards = document.querySelectorAll('.pricing-card');
+        
+        pricingCards.forEach(card => {
+            const amountElement = card.querySelector('.amount');
+            const periodElement = card.querySelector('.period');
+            const yearlyInfo = card.querySelector('.yearly-info');
+            
+            if (amountElement && amountElement.hasAttribute('data-monthly')) {
+                const monthlyPrice = amountElement.getAttribute('data-monthly');
+                const yearlyPrice = amountElement.getAttribute('data-yearly');
+                
+                if (isYearly) {
+                    amountElement.textContent = yearlyPrice;
+                    periodElement.textContent = '/year';
+                    if (yearlyInfo) {
+                        yearlyInfo.style.display = 'none';
+                    }
+                } else {
+                    amountElement.textContent = monthlyPrice;
+                    periodElement.textContent = '/month';
+                    if (yearlyInfo) {
+                        yearlyInfo.style.display = 'none';
+                    }
+                }
+                
+                // Add smooth animation
+                amountElement.style.animation = 'none';
+                setTimeout(() => {
+                    amountElement.style.animation = 'fadeIn 0.3s ease-out';
+                }, 10);
+            }
+        });
+    });
+}
+
+// ================================================
 // INITIALIZATION
 // ================================================
 

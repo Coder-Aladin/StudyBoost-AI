@@ -722,32 +722,31 @@
     </section>
 
     <!-- PRICING SECTION -->
-    <section class="pricing" role="region" aria-label="Pricing section">
+    <section class="pricing" id="pricing" role="region" aria-label="Pricing section">
         <!-- Background Elements -->
         <div class="pricing-background" aria-hidden="true">
-            <div class="pricing-glow glow-price-1"></div>
-            <div class="pricing-glow glow-price-2"></div>
+            <div class="pricing-glow"></div>
         </div>
 
         <div class="pricing-container">
             <!-- Section Heading -->
             <div class="pricing-header">
-                <div class="pricing-tagline">SIMPLE PRICING</div>
-                <h2 class="pricing-title">Choose Your Perfect Plan</h2>
-                <p class="pricing-description">Select the plan that best fits your study needs. All plans include core features.</p>
+                <div class="pricing-tagline">FLEXIBLE PRICING</div>
+                <h2 class="pricing-title">Plans for Every Student</h2>
+                <p class="pricing-description">Choose the perfect plan to accelerate your learning journey</p>
             </div>
 
             <!-- Billing Toggle -->
             <div class="billing-toggle">
                 <span class="toggle-label">Monthly</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="billing-toggle" aria-label="Toggle between monthly and yearly billing">
+                <label class="toggle-switch" aria-label="Switch between monthly and yearly billing">
+                    <input type="checkbox" id="billing-toggle" role="switch" aria-checked="false">
                     <span class="toggle-slider"></span>
                 </label>
                 <span class="toggle-label">Yearly <span class="save-badge">Save 20%</span></span>
             </div>
 
-            <!-- Pricing Cards Grid -->
+            <!-- Pricing Grid -->
             <div class="pricing-grid">
                 <!-- Free Plan -->
                 <div class="pricing-card free-plan" role="article">
@@ -758,47 +757,52 @@
 
                     <div class="plan-price">
                         <span class="currency">$</span>
-                        <span class="amount">0</span>
+                        <span class="amount" data-monthly="0" data-yearly="0">0</span>
                         <span class="period">/month</span>
                     </div>
 
-                    <button class="btn-plan">Get Started</button>
+                    <p class="price-note">Forever free, no credit card required</p>
+
+                    <button class="btn-plan btn-secondary" aria-label="Start with free plan">Get Started</button>
 
                     <ul class="plan-features" role="list">
                         <li role="listitem">
-                            <span class="feature-icon">✓</span>
+                            <span class="feature-icon" aria-hidden="true">✓</span>
                             <span>5 summaries/month</span>
                         </li>
                         <li role="listitem">
-                            <span class="feature-icon">✓</span>
+                            <span class="feature-icon" aria-hidden="true">✓</span>
                             <span>Basic notes access</span>
                         </li>
                         <li role="listitem">
-                            <span class="feature-icon">✓</span>
+                            <span class="feature-icon" aria-hidden="true">✓</span>
                             <span>Mobile app access</span>
                         </li>
-                        <li role="listitem">
-                            <span class="feature-icon">✗</span>
-                            <span class="disabled">Flashcards generator</span>
+                        <li class="disabled" role="listitem">
+                            <span class="feature-icon" aria-hidden="true">✗</span>
+                            <span>Flashcards</span>
                         </li>
-                        <li role="listitem">
-                            <span class="feature-icon">✗</span>
-                            <span class="disabled">Quiz generation</span>
+                        <li class="disabled" role="listitem">
+                            <span class="feature-icon" aria-hidden="true">✗</span>
+                            <span>Quizzes</span>
                         </li>
-                        <li role="listitem">
-                            <span class="feature-icon">✗</span>
-                            <span class="disabled">Priority support</span>
+                        <li class="disabled" role="listitem">
+                            <span class="feature-icon" aria-hidden="true">✗</span>
+                            <span>Priority support</span>
                         </li>
                     </ul>
                 </div>
 
-                <!-- Pro Plan (Most Popular) -->
+                <!-- Pro Plan (Featured) -->
                 <div class="pricing-card pro-plan featured" role="article">
-                    <div class="popular-badge">Most Popular</div>
+                    <div class="popular-badge" aria-hidden="true">
+                        <span class="badge-spark">⭐</span>
+                        Most Popular
+                    </div>
 
                     <div class="plan-header">
                         <h3 class="plan-name">Pro</h3>
-                        <p class="plan-subtitle">For serious learners</p>
+                        <p class="plan-subtitle">Best for serious learners</p>
                     </div>
 
                     <div class="plan-price">
@@ -807,34 +811,34 @@
                         <span class="period">/month</span>
                     </div>
 
-                    <p class="yearly-info" style="display: none;">$108/year</p>
+                    <p class="price-note yearly-info" style="display: none;">Billed annually - save 20%</p>
 
-                    <button class="btn-plan btn-primary">Start Free Trial</button>
+                    <button class="btn-plan btn-primary" aria-label="Start with pro plan">Get Started Free</button>
 
                     <ul class="plan-features" role="list">
                         <li role="listitem">
-                            <span class="feature-icon">✓</span>
+                            <span class="feature-icon" aria-hidden="true">✓</span>
                             <span>Unlimited summaries</span>
                         </li>
                         <li role="listitem">
-                            <span class="feature-icon">✓</span>
+                            <span class="feature-icon" aria-hidden="true">✓</span>
                             <span>Flashcards generator</span>
                         </li>
                         <li role="listitem">
-                            <span class="feature-icon">✓</span>
+                            <span class="feature-icon" aria-hidden="true">✓</span>
                             <span>Quiz generation</span>
                         </li>
                         <li role="listitem">
-                            <span class="feature-icon">✓</span>
+                            <span class="feature-icon" aria-hidden="true">✓</span>
                             <span>Image to notes OCR</span>
                         </li>
                         <li role="listitem">
-                            <span class="feature-icon">✓</span>
+                            <span class="feature-icon" aria-hidden="true">✓</span>
                             <span>PDF & Video summaries</span>
                         </li>
-                        <li role="listitem">
-                            <span class="feature-icon">✗</span>
-                            <span class="disabled">Priority support</span>
+                        <li class="disabled" role="listitem">
+                            <span class="feature-icon" aria-hidden="true">✗</span>
+                            <span>Priority support</span>
                         </li>
                     </ul>
                 </div>
@@ -852,33 +856,33 @@
                         <span class="period">/month</span>
                     </div>
 
-                    <p class="yearly-info" style="display: none;">$228/year</p>
+                    <p class="price-note yearly-info" style="display: none;">Billed annually - save 20%</p>
 
-                    <button class="btn-plan btn-secondary">Upgrade Now</button>
+                    <button class="btn-plan btn-secondary" aria-label="Start with premium plan">Get Started Free</button>
 
                     <ul class="plan-features" role="list">
                         <li role="listitem">
-                            <span class="feature-icon">✓</span>
+                            <span class="feature-icon" aria-hidden="true">✓</span>
                             <span>Everything in Pro</span>
                         </li>
                         <li role="listitem">
-                            <span class="feature-icon">✓</span>
+                            <span class="feature-icon" aria-hidden="true">✓</span>
                             <span>Priority support 24/7</span>
                         </li>
                         <li role="listitem">
-                            <span class="feature-icon">✓</span>
+                            <span class="feature-icon" aria-hidden="true">✓</span>
                             <span>Custom study schedules</span>
                         </li>
                         <li role="listitem">
-                            <span class="feature-icon">✓</span>
+                            <span class="feature-icon" aria-hidden="true">✓</span>
                             <span>Advanced analytics</span>
                         </li>
                         <li role="listitem">
-                            <span class="feature-icon">✓</span>
+                            <span class="feature-icon" aria-hidden="true">✓</span>
                             <span>Offline access</span>
                         </li>
                         <li role="listitem">
-                            <span class="feature-icon">✓</span>
+                            <span class="feature-icon" aria-hidden="true">✓</span>
                             <span>API access</span>
                         </li>
                     </ul>
@@ -887,8 +891,100 @@
 
             <!-- Pricing Footer -->
             <div class="pricing-footer">
-                <p class="pricing-note">All plans include a 7-day free trial. No credit card required.</p>
-                <p class="pricing-support">Questions? <a href="#" class="support-link">Contact our support team</a></p>
+                <p class="pricing-note">7-day free trial, no credit card required</p>
+                <a href="#support" class="support-link">Questions? Contact support</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq" id="faq" role="region" aria-label="Frequently asked questions section">
+        <!-- Background Elements -->
+        <div class="faq-background" aria-hidden="true">
+            <div class="faq-glow"></div>
+        </div>
+
+        <div class="faq-container">
+            <!-- Section Heading -->
+            <div class="faq-header">
+                <div class="faq-tagline">QUESTIONS & ANSWERS</div>
+                <h2 class="faq-title">Frequently Asked Questions</h2>
+                <p class="faq-description">Everything you need to know about StudyBoost AI</p>
+            </div>
+
+            <!-- Accordion Container -->
+            <div class="accordion" role="region" aria-label="FAQ accordion">
+                <!-- FAQ Item 1 -->
+                <div class="accordion-item" role="listitem">
+                    <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-answer-1" role="button">
+                        <span class="trigger-text">Is StudyBoost AI free?</span>
+                        <span class="trigger-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="accordion-content" id="faq-answer-1" hidden role="region">
+                        <p class="accordion-answer">Yes! StudyBoost AI offers a free plan with 5 summaries per month, basic notes access, and mobile app access. Our Pro and Premium plans unlock unlimited features with affordable pricing. You can start for free without any credit card required.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="accordion-item" role="listitem">
+                    <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-answer-2" role="button">
+                        <span class="trigger-text">Can I upload PDFs and handwritten notes?</span>
+                        <span class="trigger-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="accordion-content" id="faq-answer-2" hidden role="region">
+                        <p class="accordion-answer">Absolutely! StudyBoost AI supports multiple input formats including PDFs, text files, and images of handwritten notes. Our advanced OCR technology can recognize handwriting and convert it into organized digital notes. You can also upload images of book pages and textbooks.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="accordion-item" role="listitem">
+                    <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-answer-3" role="button">
+                        <span class="trigger-text">Does it summarize YouTube videos?</span>
+                        <span class="trigger-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="accordion-content" id="faq-answer-3" hidden role="region">
+                        <p class="accordion-answer">Yes! You can paste YouTube video links and StudyBoost AI will extract the transcript and generate concise summaries with key points and timestamps. This is perfect for learning from educational videos without watching the entire content twice.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="accordion-item" role="listitem">
+                    <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-answer-4" role="button">
+                        <span class="trigger-text">Is my data secure?</span>
+                        <span class="trigger-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="accordion-content" id="faq-answer-4" hidden role="region">
+                        <p class="accordion-answer">Data security is our top priority. All data is encrypted in transit and at rest using industry-standard protocols. Your documents and personal information are never shared with third parties. We comply with GDPR, CCPA, and other privacy regulations. You have full control over your data and can delete it anytime.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="accordion-item" role="listitem">
+                    <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-answer-5" role="button">
+                        <span class="trigger-text">Can I generate quizzes and flashcards?</span>
+                        <span class="trigger-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="accordion-content" id="faq-answer-5" hidden role="region">
+                        <p class="accordion-answer">Yes! With Pro and Premium plans, you can automatically generate AI-powered quizzes and flashcards from your notes and uploaded content. Our intelligent system creates relevant questions that match your study level and includes spaced repetition for optimal learning outcomes.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 6 -->
+                <div class="accordion-item" role="listitem">
+                    <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-answer-6" role="button">
+                        <span class="trigger-text">Which languages are supported?</span>
+                        <span class="trigger-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="accordion-content" id="faq-answer-6" hidden role="region">
+                        <p class="accordion-answer">StudyBoost AI currently supports English, Spanish, French, German, Chinese, Japanese, and Korean. We're continuously expanding language support. All core features including summarization, flashcard generation, and quizzes work in all supported languages. More languages coming soon!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Footer -->
+            <div class="faq-footer">
+                <p class="faq-footer-text">Still have questions?</p>
+                <a href="#support" class="faq-support-link">Contact our support team</a>
             </div>
         </div>
     </section>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate smart PDF notes from book page images using StudyBoost AI">
+    <title>Generate Smart Notes - StudyBoost AI</title>
+    <link rel="stylesheet" href="css/ocr-style.css">
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="url(#grad)" stroke-width="2"/>
+                        <path d="M8 12H16M12 8V16" stroke="url(#grad)" stroke-width="2" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="grad" x1="0" y1="0" x2="24" y2="24">
+                                <stop offset="0%" stop-color="#7C3AED"/>
+                                <stop offset="100%" stop-color="#06B6D4"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">StudyBoost AI Notes</span>
+            </div>
+            <div class="nav-buttons">
+                <a href="ocr-tool.html" class="btn btn-reset" aria-label="Back to OCR upload page">← Back to Upload</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="notes-container">
+        <section class="notes-header">
+            <div>
+                <h1 class="notes-title">Generate Smart Study Notes</h1>
+                <p class="notes-subtitle">Your OCR text is ready. Gemini AI will turn it into concise, exam-ready notes and a polished PDF.</p>
+            </div>
+            <div class="notes-actions">
+                <button id="generateNotesBtn" class="btn btn-primary">Generate Notes</button>
+                <button id="downloadPdfBtn" class="btn btn-primary" disabled>Download PDF</button>
+                <button id="resetSessionBtn" class="btn btn-reset">Start Over</button>
+            </div>
+        </section>
+
+        <section class="notes-status-card" id="notesStatusCard">
+            <h2>AI Processing Status</h2>
+            <p id="aiStatus">Waiting for your request...</p>
+        </section>
+
+        <section class="notes-grid">
+            <div class="notes-panel notes-image-card" id="imageUploadPreview" style="display:none;">
+                <h3>Uploaded Page Preview</h3>
+                <img id="imagePreview" class="notes-image-preview" alt="Uploaded page preview">
+                <button class="btn btn-small btn-reset" id="removeImageFromNotes" type="button">Remove Image</button>
+            </div>
+
+            <div class="notes-panel notes-preview-card">
+                <h3>Raw OCR Text Preview</h3>
+                <div class="text-output-container" id="sourcePreview"></div>
+            </div>
+
+            <div class="notes-panel notes-summary-card" id="generatedCard" style="display:none;">
+                <h3>Generated Notes Preview</h3>
+                <div class="notes-output" id="notesOutput"></div>
+                <div class="notes-actions-row">
+                    <button id="copySummaryBtn" class="btn btn-small btn-copy">Copy Summary</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-quicktips">
+            <div class="info-card">
+                <h3>Tips for Stronger Notes</h3>
+                <ul class="info-list">
+                    <li>Review the summary and use the PDF to study faster.</li>
+                    <li>Use the bullet points to guide exam revision.</li>
+                    <li>Export the PDF and keep it in your study folder.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast" id="toastMessage" role="status" aria-live="polite"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.1.1/dist/tesseract.min.js"></script>
+    <script src="js/generate-notes.js"></script>
+</body>
+</html>

@@ -84,12 +84,21 @@
                 </p>
 
                 <div class="hero-cta">
-                    <button class="btn-primary btn-large" aria-label="Get started for free with StudyBoost AI">Get Started Free</button>
-                    <button class="btn-secondary btn-large" aria-label="Watch demo video">
-                        <span class="play-icon" aria-hidden="true">▶</span>
-                        Watch Demo
+                    <button class="btn-primary btn-large file-upload-btn" aria-label="Upload file to get started" id="fileUploadBtn">
+                        <span class="upload-icon-btn" aria-hidden="true">📤</span>
+                        Upload & Summarize
                     </button>
+                    <a href="ocr-tool.html" class="btn-secondary btn-large" aria-label="Extract text from images using OCR" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                        <span class="play-icon" aria-hidden="true">📸</span>
+                        Image to Text OCR
+                    </a>
                 </div>
+                
+                <!-- Hidden File Input -->
+                <input type="file" id="fileInput" accept=".pdf,.txt,.png,.jpg,.jpeg" style="display: none;" aria-label="Choose file to upload">
+                
+                <!-- File Upload Feedback -->
+                <div id="uploadFeedback" class="upload-feedback" role="status" aria-live="polite"></div>
 
                 <div class="trust-indicators" role="list">
                     <div class="trust-item" role="listitem">
@@ -114,16 +123,16 @@
                     <div class="dashboard-card main-card">
                         <!-- Sidebar -->
                         <div class="dashboard-sidebar" role="navigation" aria-label="Dashboard sidebar">
-                            <div class="sidebar-item active" role="button" tabindex="0">
+                            <div class="sidebar-item active" role="button" tabindex="0" id="sidebarItem1" aria-label="Books">
                                 <div class="sidebar-icon" aria-hidden="true">📚</div>
                             </div>
-                            <div class="sidebar-item" role="button" tabindex="0">
+                            <div class="sidebar-item" role="button" tabindex="0" id="sidebarItem2" aria-label="Lightning">
                                 <div class="sidebar-icon" aria-hidden="true">⚡</div>
                             </div>
-                            <div class="sidebar-item" role="button" tabindex="0">
+                            <div class="sidebar-item" role="button" tabindex="0" id="sidebarItem3" aria-label="Chart">
                                 <div class="sidebar-icon" aria-hidden="true">📊</div>
                             </div>
-                            <div class="sidebar-item" role="button" tabindex="0">
+                            <div class="sidebar-item" role="button" tabindex="0" id="sidebarItem4" aria-label="Settings">
                                 <div class="sidebar-icon" aria-hidden="true">⚙️</div>
                             </div>
                         </div>
@@ -131,7 +140,7 @@
                         <!-- Dashboard Content -->
                         <div class="dashboard-content">
                             <!-- Upload Area -->
-                            <div class="upload-area" role="button" tabindex="0">
+                            <div class="upload-area" role="button" tabindex="0" id="dashboardUploadArea">
                                 <div class="upload-icon" aria-hidden="true">📤</div>
                                 <p class="upload-text">Upload your notes</p>
                                 <p class="upload-subtext">PDF, TXT, or image</p>
@@ -160,6 +169,19 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Hero Upload Preview Card -->
+                    <div class="floating-card upload-preview-card" id="heroUploadCard">
+                        <div class="card-header">
+                            <span class="card-title">Upload Page Preview</span>
+                            <button class="btn btn-small btn-reset" id="heroRemoveBtn" type="button" style="display:none;">Remove</button>
+                        </div>
+                        <div class="hero-image-wrapper">
+                            <img id="heroPreviewImage" class="hero-preview-image" alt="Uploaded page preview" style="display:none;">
+                            <div class="hero-preview-hint" id="heroPreviewHint">Upload a book page image to preview here.</div>
+                        </div>
+                        <button class="btn btn-primary hero-generate-btn" id="heroGenerateNotesBtn" disabled>Generate Notes</button>
                     </div>
 
                     <!-- Floating Cards -->

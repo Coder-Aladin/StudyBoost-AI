@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5, user-scalable=yes">
+    <meta name="description" content="StudyBoost AI - Upload book page images and extract OCR text before generating smart notes.">
+    <title>Book Page OCR to Notes - StudyBoost AI</title>
+    <link rel="stylesheet" href="css/ocr-style.css">
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="url(#grad)" stroke-width="2"/>
+                        <path d="M8 12H16M12 8V16" stroke="url(#grad)" stroke-width="2" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="grad" x1="0" y1="0" x2="24" y2="24">
+                                <stop offset="0%" stop-color="#7C3AED"/>
+                                <stop offset="100%" stop-color="#06B6D4"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">StudyBoost OCR</span>
+            </div>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </div>
+    </nav>
+
+    <main class="ocr-container">
+        <header class="ocr-header">
+            <h1 class="ocr-title">Book Page to Smart Notes</h1>
+            <p class="ocr-subtitle">Upload one or more page images, extract the text, then generate AI-powered study notes and PDF.</p>
+        </header>
+
+        <section class="ocr-content">
+            <div class="upload-section">
+                <div class="upload-card">
+                    <div class="drag-drop-zone" id="dragDropZone" role="region" aria-label="Drag and drop area for image upload">
+                        <input
+                            type="file"
+                            id="imageInput"
+                            accept="image/*"
+                            multiple
+                            style="display: none;"
+                            aria-label="Choose image files for OCR"
+                        >
+                        <div class="drag-drop-content">
+                            <div class="upload-icon" aria-hidden="true">📷</div>
+                            <h2 class="upload-title">Drag & Drop Pages</h2>
+                            <p class="upload-description">Add book page images, notebook pages, or handwritten notes.</p>
+                            <button class="btn btn-primary upload-btn" id="uploadBtn" aria-label="Select images to upload">
+                                <span class="btn-icon">📁</span>
+                                Choose Images
+                            </button>
+                            <p class="upload-formats">Supports JPG, PNG, GIF, WebP. Max 10MB per image.</p>
+                        </div>
+                    </div>
+
+                    <div class="preview-summary-card" id="previewCard" style="display:none;">
+                        <div class="preview-card-top">
+                            <div>
+                                <p class="preview-card-title">Floating Image Preview</p>
+                                <p class="preview-card-subtitle" id="previewCount">0 pages selected</p>
+                            </div>
+                            <span class="preview-badge">Live preview</span>
+                        </div>
+                        <div class="floating-image-preview">
+                            <img id="floatingPreviewImage" class="floating-preview-image" alt="Preview of first uploaded page">
+                        </div>
+                        <p class="preview-card-note">This floating card shows your selected page instantly while you prepare OCR.</p>
+                    </div>
+
+                    <div class="image-grid" id="imageGrid" style="display:none;" aria-label="Uploaded image preview grid"></div>
+
+                    <div class="upload-toolbar">
+                        <button class="btn btn-primary upload-btn" id="uploadBtnSecondary">Select Images</button>
+                        <button class="btn btn-extract" id="extractBtn" disabled>Extract Text</button>
+                    </div>
+
+                    <div class="hint-row">
+                        <span class="hint-pill">Multi-page upload</span>
+                        <span class="hint-pill">OCR progress</span>
+                        <span class="hint-pill">Auto note generation</span>
+                    </div>
+
+                    <div class="error-message" id="errorMessage" style="display:none;" role="alert" aria-live="polite"></div>
+                </div>
+            </div>
+
+            <div class="processing-section" id="processingSection" style="display:none;">
+                <div class="processing-card">
+                    <div class="processing-header">
+                        <div class="processing-spinner" aria-hidden="true"></div>
+                        <div>
+                            <p class="processing-title">Extracting Text...</p>
+                            <p class="processing-meta" id="processingStatus">Initializing OCR engine...</p>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <p class="progress-text" id="progressText">0%</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="output-section" id="outputSection" style="display:none;">
+                <div class="output-card">
+                    <div class="output-header">
+                        <div>
+                            <h2 class="output-title">Extracted OCR Text</h2>
+                            <p class="output-subtitle">Review the combined text and send it to the notes builder.</p>
+                        </div>
+                        <div class="output-actions">
+                            <button class="btn btn-small btn-copy" id="copyBtn" aria-label="Copy extracted text to clipboard">
+                                <span class="copy-icon">📋</span>
+                                Copy
+                            </button>
+                            <button class="btn btn-small btn-primary" id="generateNotesBtn" aria-label="Generate notes from extracted text">
+                                Generate Notes
+                            </button>
+                            <button class="btn btn-small btn-reset" id="resetBtn" aria-label="Reset upload and start over">
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="text-output-container">
+                        <div class="text-output" id="textOutput" role="region" aria-label="Extracted text output"></div>
+                    </div>
+
+                    <div class="output-stats">
+                        <div class="stat">
+                            <span class="stat-label">Characters</span>
+                            <span class="stat-value" id="charCount">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Words</span>
+                            <span class="stat-value" id="wordCount">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Confidence</span>
+                            <span class="stat-value" id="confidenceScore">0%</span>
+                        </div>
+                    </div>
+
+                    <div class="success-message" id="copySuccess" style="display:none;" role="status" aria-live="polite">✓ Copied to clipboard!</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="info-card">
+                <h3 class="info-title">💡 Best Practices</h3>
+                <ul class="info-list">
+                    <li>Choose clear book or notebook pages for higher accuracy.</li>
+                    <li>Upload multiple pages to merge them into one smart note file.</li>
+                    <li>If text is blurry, use better lighting or scan again.</li>
+                    <li>The AI will clean OCR mistakes and structure notes professionally.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast" id="toastMessage" role="status" aria-live="polite"></div>
+
+    <script src="https://unpkg.com/tesseract.js@v5.0.4/dist/tesseract.min.js"></script>
+    <script src="js/ocr-app.js"></script>
+</body>
+</html>

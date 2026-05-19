@@ -12,6 +12,13 @@ const navLinks = document.getElementById('navLinks');
 const navbar = document.querySelector('.navbar');
 const navItems = document.querySelectorAll('.nav-link');
 const body = document.body;
+let heroImageData = '';
+const fileInput = document.getElementById('fileInput');
+const fileUploadBtn = document.getElementById('fileUploadBtn');
+const heroPreviewImage = document.getElementById('heroPreviewImage');
+const heroGenerateNotesBtn = document.getElementById('heroGenerateNotesBtn');
+const heroRemoveBtn = document.getElementById('heroRemoveBtn');
+const heroPreviewHint = document.getElementById('heroPreviewHint');
 
 // Enhanced Hamburger Menu Toggle
 function toggleMenu() {
@@ -237,6 +244,66 @@ if (!document.querySelector('style[data-ripple]')) {
         }
     `;
     document.head.appendChild(style);
+}
+
+if (heroRemoveBtn) {
+    heroRemoveBtn.addEventListener('click', clearHeroPreview);
+}
+
+if (heroGenerateNotesBtn) {
+    heroGenerateNotesBtn.addEventListener('click', redirectToGenerateNotes);
+}
+
+function handleHeroFileSelect(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+        showToast('Please upload an image file to preview and generate notes.');
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        heroImageData = e.target.result;
+        updateHeroPreview();
+    };
+    reader.readAsDataURL(file);
+}
+
+function updateHeroPreview() {
+    if (!heroPreviewImage || !heroGenerateNotesBtn || !heroPreviewHint || !heroRemoveBtn) return;
+    heroPreviewImage.src = heroImageData;
+    heroPreviewImage.style.display = 'block';
+    heroPreviewHint.style.display = 'none';
+    heroGenerateNotesBtn.disabled = false;
+    heroRemoveBtn.style.display = 'inline-flex';
+}
+
+function clearHeroPreview() {
+    heroImageData = '';
+    if (fileInput) fileInput.value = '';
+    if (heroPreviewImage) heroPreviewImage.style.display = 'none';
+    if (heroGenerateNotesBtn) heroGenerateNotesBtn.disabled = true;
+    if (heroRemoveBtn) heroRemoveBtn.style.display = 'none';
+    if (heroPreviewHint) heroPreviewHint.style.display = 'block';
+    showToast('Upload removed.');
+}
+
+function redirectToGenerateNotes() {
+    if (!heroImageData) {
+        showToast('Upload an image before generating notes.');
+        return;
+    }
+
+    try {
+        sessionStorage.setItem('studyboost_image_data', heroImageData);
+        sessionStorage.removeItem('studyboost_ocr_text');
+        window.location.href = 'generate-notes.html';
+    } catch (error) {
+        console.error('Redirect error:', error);
+        showToast('Unable to preserve uploaded image. Please try again.');
+    }
 }
 
 // ================================================
@@ -817,3 +884,273 @@ window.addEventListener('scroll', () => {
         }
     }
 });
+
+/* ================================================
+   HERO SECTION: FILE UPLOAD FUNCTIONALITY
+   ================================================ */
+
+const uploadFeedback = document.getElementById('uploadFeedback');
+const dashboardUploadArea = document.getElementById('dashboardUploadArea');
+
+// Valid file types and max size (5MB)
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const VALID_TYPES = ['application/pdf', 'text/plain', 'image/png', 'image/jpeg', 'image/jpg'];
+
+// Trigger file input when button is clicked
+if (fileUploadBtn) {
+    fileUploadBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (fileInput) fileInput.click();
+    });
+}
+
+// Trigger file input from dashboard upload area
+if (dashboardUploadArea) {
+    dashboardUploadArea.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (fileInput) fileInput.click();
+    });
+}
+
+// Handle keyboard interaction for file upload button
+if (fileUploadBtn) {
+    fileUploadBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            if (fileInput) fileInput.click();
+        }
+    });
+}
+
+// Handle keyboard interaction for dashboard upload area
+if (dashboardUploadArea) {
+    dashboardUploadArea.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            if (fileInput) fileInput.click();
+        }
+    });
+}
+
+// Handle file selection
+if (fileInput) {
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        if (file.type.startsWith('image/')) {
+            handleHeroFileSelect(e);
+            showUploadFeedback(`Previewing ${file.name}...`, 'success');
+            return;
+        }
+
+        // Validate file
+        const validation = validateFile(file);
+        if (!validation.valid) {
+            showUploadFeedback(validation.message, 'error');
+            if (fileInput) fileInput.value = '';
+            return;
+        }
+        
+        // Show loading feedback
+        showUploadFeedback(`Processing ${file.name}...`, 'loading');
+        
+        // Simulate file processing (in real app, you'd upload to server)
+        setTimeout(() => {
+            showUploadFeedback(`✓ ${file.name} uploaded successfully! Generating summary...`, 'success');
+            
+            // Reset after 4 seconds
+            setTimeout(() => {
+                if (uploadFeedback) uploadFeedback.classList.remove('show');
+                if (fileInput) fileInput.value = '';
+            }, 4000);
+        }, 2000);
+    });
+}
+
+// Handle drag and drop on the button
+fileUploadBtn.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    fileUploadBtn.style.transform = 'scale(1.05)';
+    fileUploadBtn.style.opacity = '0.8';
+});
+
+fileUploadBtn.addEventListener('dragleave', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    fileUploadBtn.style.transform = 'scale(1)';
+    fileUploadBtn.style.opacity = '1';
+});
+
+fileUploadBtn.addEventListener('drop', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    fileUploadBtn.style.transform = 'scale(1)';
+    fileUploadBtn.style.opacity = '1';
+    
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+        fileInput.files = files;
+        const event = new Event('change', { bubbles: true });
+        fileInput.dispatchEvent(event);
+    }
+});
+
+// Handle drag and drop on dashboard upload area
+if (dashboardUploadArea) {
+    dashboardUploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dashboardUploadArea.style.transform = 'scale(1.05)';
+        dashboardUploadArea.style.opacity = '0.8';
+        dashboardUploadArea.style.backgroundColor = 'rgba(124, 58, 237, 0.2)';
+        dashboardUploadArea.style.borderColor = 'rgba(124, 58, 237, 0.6)';
+    });
+
+    dashboardUploadArea.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dashboardUploadArea.style.transform = 'scale(1)';
+        dashboardUploadArea.style.opacity = '1';
+        dashboardUploadArea.style.backgroundColor = '';
+        dashboardUploadArea.style.borderColor = '';
+    });
+
+    dashboardUploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dashboardUploadArea.style.transform = 'scale(1)';
+        dashboardUploadArea.style.opacity = '1';
+        dashboardUploadArea.style.backgroundColor = '';
+        dashboardUploadArea.style.borderColor = '';
+        
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            fileInput.files = files;
+            const event = new Event('change', { bubbles: true });
+            fileInput.dispatchEvent(event);
+        }
+    });
+}
+
+/* ================================================
+   SIDEBAR BUTTONS FUNCTIONALITY
+   ================================================ */
+
+// Sidebar button data
+const sidebarData = [
+    { id: 'sidebarItem1', label: 'Study Materials', icon: '📚' },
+    { id: 'sidebarItem2', label: 'Quick Summary', icon: '⚡' },
+    { id: 'sidebarItem3', label: 'Analytics', icon: '📊' },
+    { id: 'sidebarItem4', label: 'Settings', icon: '⚙️' }
+];
+
+// Initialize sidebar buttons
+sidebarData.forEach((item, index) => {
+    const sidebarItem = document.getElementById(item.id);
+    if (sidebarItem) {
+        // Click handler
+        sidebarItem.addEventListener('click', (e) => {
+            e.preventDefault();
+            selectSidebarItem(item.id, item.label);
+        });
+        
+        // Keyboard support
+        sidebarItem.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                selectSidebarItem(item.id, item.label);
+            }
+        });
+    }
+});
+
+// Handle sidebar item selection
+function selectSidebarItem(itemId, label) {
+    // Remove active class from all items
+    sidebarData.forEach(item => {
+        const element = document.getElementById(item.id);
+        if (element) {
+            element.classList.remove('active');
+        }
+    });
+    
+    // Add active class to clicked item
+    const selectedItem = document.getElementById(itemId);
+    if (selectedItem) {
+        selectedItem.classList.add('active');
+    }
+    
+    // Show feedback
+    console.log(`${label} section selected`);
+    
+    // Optional: Update dashboard content based on selection
+    updateDashboardContent(label);
+}
+
+// Update dashboard content based on selected section
+function updateDashboardContent(section) {
+    switch(section) {
+        case 'Study Materials':
+            // Update content for study materials
+            break;
+        case 'Quick Summary':
+            // Update content for summary
+            break;
+        case 'Analytics':
+            // Update content for analytics
+            break;
+        case 'Settings':
+            // Update content for settings
+            break;
+    }
+}
+
+// Validate file
+function validateFile(file) {
+    if (!VALID_TYPES.includes(file.type)) {
+        return {
+            valid: false,
+            message: '⚠️ Invalid file type. Please upload PDF, TXT, or image files only.'
+        };
+    }
+    
+    if (file.size > MAX_FILE_SIZE) {
+        return {
+            valid: false,
+            message: '⚠️ File is too large. Maximum size is 5MB.'
+        };
+    }
+    
+    return { valid: true };
+}
+
+// Show upload feedback message
+function showUploadFeedback(message, type) {
+    uploadFeedback.textContent = message;
+    uploadFeedback.className = `upload-feedback ${type} show`;
+    
+    // Auto-hide error messages after 5 seconds
+    if (type === 'error') {
+        setTimeout(() => {
+            uploadFeedback.classList.remove('show');
+        }, 5000);
+    }
+}
+
+/* ================================================
+   FEATURE CARD BUTTON HANDLERS
+   ================================================ */
+
+// Handle Image to Notes featured card button click
+const featuredCard = document.querySelector('.featured-card');
+if (featuredCard) {
+    const startConvertingBtn = featuredCard.querySelector('.btn-card');
+    if (startConvertingBtn) {
+        startConvertingBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = 'ocr-tool.html';
+        });
+    }
+}
